@@ -71,7 +71,19 @@ class sensorCO2_API:
         if self.state == 'RESUME': return sensors.get('CO2')
         else: return None
 
-class sensorPH_API:
+# class sensorPH_API:
+#     def __init__(self):
+#         pass
+
+#     state = 'SUSPEND'
+#     def start(self):
+#         self.state = 'RESUME'
+
+#     def getData(self):
+#         if self.state == 'RESUME': return sensors.get('PH1')
+#         else: return None
+
+class sensorMT_API:
     def __init__(self):
         pass
 
@@ -80,10 +92,10 @@ class sensorPH_API:
         self.state = 'RESUME'
 
     def getData(self):
-        if self.state == 'RESUME': return sensors.get('PH1')
+        if self.state == 'RESUME': return sensors.get('Moisture1')
         else: return None
 
-class sensorPS_API:
+class sensorST_API:
     def __init__(self):
         pass
 
@@ -92,15 +104,10 @@ class sensorPS_API:
         self.state = 'RESUME'
 
     def getData(self):
-        if self.state == 'RESUME':
-            A = sensors.get('AtPressure')
-            B = sensors.get('Temperature1')
-            C = sensors.get('Humidity1')
-            if None in [A, B, C]: return None
-            return A, B, C
+        if self.state == 'RESUME': return sensors.get('SoilTemp-I')
         else: return None
 
-class sensorEC_API:
+class sensorLM_API:
     def __init__(self):
         pass
 
@@ -109,47 +116,8 @@ class sensorEC_API:
         self.state = 'RESUME'
 
     def getData(self):
-        if self.state == 'RESUME':
-            A = sensors.get('Moisture1')
-            B = sensors.get('SoilTemp-I')
-            C =  sensors.get('SoilEC-I')
-            if None in [A, B, C]: return None
-            return A, B, C
+        if self.state == 'RESUME': return sensors.get('Luminance')
         else: return None
-
-class sensorSHT31_API:
-    def __init__(self):
-        pass
-
-    state = 'SUSPEND'
-    def start(self):
-        self.state = 'RESUME'
-
-    def getData(self):
-        if self.state == 'RESUME':
-            A = sensors.get('Temperature2')
-            B = sensors.get('Humidity2')
-            if None in [A, B]: return None
-            return A, B
-        else: return None
-
-class sensorUV_API:
-    def __init__(self):
-        pass
-
-    state = 'SUSPEND'
-    def start(self):
-        self.state = 'RESUME'
-
-    def getData(self):
-        if self.state == 'RESUME':
-            A = sensors.get('UV1')
-            B = sensors.get('Luminance')
-            C =  sensors.get('Infrared')
-            if None in [A, B, C]: return None
-            return A, B, C
-        else: return None
-
 
 if __name__ == '__main__':
     pass
