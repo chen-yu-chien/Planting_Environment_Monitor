@@ -7,9 +7,9 @@
 
     var profile = {
 	    'dm_name': 'Bulb',          
-		'idf_list':[Luminance_I],  // 用變數
-		'odf_list':[Color_O, Luminance], // "-"要改成"_"
-        // 'odf_list':[Luminance],
+		'idf_list':[],  // 用變數
+		// 'odf_list':[Color_O, Luminance], // "-"要改成"_"
+        'odf_list':[Luminance],
 		'd_name': 'yc_Bulb',
     };
 
@@ -18,9 +18,9 @@
     var b = 0;
     var lum = 0;
 
-    function Luminance_I(data){
-        console.log(data);
-    }
+    // function Luminance_I(data){
+    //     console.log(data);
+    // }
 
     function draw () {
         var rr = Math.floor((r * lum) / 100);
@@ -31,17 +31,30 @@
         );
     }
 
-    function Color_O(data){
-        r = data[0];
-        g = data[1];
-        b = data[2];
-        draw();
-    }
+    // function Color_O(data){
+    //     r = data[0];
+    //     g = data[1];
+    //     b = data[2];
+    //     draw();
+    // }
     
     function Luminance(data){
-        console.log("limunance:", data[0]);
-        // lum = data[0] * 10000
-        lum = data[0];
+        console.log("luminance:", data[0]);
+        if(data[0] <= 0){
+            lum = 0;
+        }
+        else if(data[0] > 0 && data[0] <= 25){
+            lum = 25;
+        }
+        else if(data[0] > 25 && data[0] <= 50){
+            lum = 50;
+        }
+        else if(data[0] > 50 && data[0] <= 75){
+            lum = 75;
+        }
+        else {
+            lum = 99;
+        }
         draw();
     }
 /*******************************************************************/                

@@ -15,11 +15,12 @@ MQTT_User = 'iottalk'
 MQTT_PW = 'iottalk2023'
 
 device_model = 'M2'
-IDF_list = ['CO2', 'Moisture', 'SoilTemp', 'Luminance']
+IDF_list = ['CO2', 'Moisture', 'SoilTemp', 'Luminance-I']
 # ODF_list = ['ODF313834004001','ODF313834004002']
 import uuid
 device_id = str(uuid.uuid4()) #if None, device_id = MAC address
-device_name = 'M2_final'
+# device_name = 'M2_final'
+device_name = 'yc_M2'
 exec_interval = 1  # IDF/ODF interval
 
 # def Dummy_Sensor():
@@ -68,7 +69,7 @@ def Moisture():
     m = mt.getData()
     if m is not None:
         print(f"Moisture Sensor data: {m}")
-        return m
+        return float(m)
     else:
         print("Moisture Sensor failed to get data.")
         return None
@@ -77,16 +78,16 @@ def SoilTemp():
     s = st.getData()
     if s is not None:
         print(f"Soil Temp Sensor data: {s}")
-        return s
+        return float(s)
     else:
         print("Soil Temp Sensor failed to get data.")
         return None
     
-def Luminance():
+def Luminance_I():
     l = lm.getData()
     if l is not None:
         print(f"Luminance Sensor data: {l}")
-        return l
+        return float(l)
     else:
         print("Luminance Sensor failed to get data.")
         return None
@@ -103,7 +104,7 @@ def on_register(r):
         # ph_data = PH()
         moisture_data = Moisture()
         soil_temp_data = SoilTemp()
-        luminance_data = Luminance()
+        luminance_data = Luminance_I()
 
         # 構建發送給 LINE Notify 的消息
         message = f"CO2: {co2_data} ppm, Moisture: {moisture_data}, Soil Temp: {soil_temp_data} °C, Luminance: {luminance_data} lux"
@@ -113,10 +114,11 @@ def on_register(r):
 
         # 等待下一次更新
         time.sleep(exec_interval)  # 每隔一段時間抓取一次數據
-    # '''
-    # #You can write some SA routine code here, for example: 
-    # import time, DAI
-    # while True:
-    #     DAI.push('Dummy_Sensor', [100, 200])  
-    #     time.sleep(exec_interval)    
-    # '''
+
+    '''
+    #You can write some SA routine code here, for example: 
+    import time, DAI
+    while True:
+        DAI.push('Dummy_Sensor', [100, 200])  
+        time.sleep(exec_interval)    
+    '''

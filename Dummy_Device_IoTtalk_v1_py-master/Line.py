@@ -3,7 +3,7 @@ import requests
 
 
 def notify(msg):
-    token_key = 'tftPUfnQRFJP31n5T9fCttlJbEB1dMeYmVPtZxErK50'
+    token_key = 'dh4EdsfqsrLKHBLfNwYA79vKmRNecnqCIbZpFnkHcnB'
     header = {'Content-Type':'application/x-www-form-urlencoded',"Authorization":'Bearer '+token_key}
     URL = 'https://notify-api.line.me/api/notify'
     payload = {'message':msg}
