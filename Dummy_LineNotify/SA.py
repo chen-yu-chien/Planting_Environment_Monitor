@@ -86,15 +86,57 @@ def on_register(r):
         print("Line aqi:", aqi)
 
         # 構建發送給 LINE Notify 的消息
-        m2_message = f"CO2: {co2} ppm, Moisture: {moisture}, Soil Temp: {soil_temp} °C, Luminance: {luminance} lux"
-        aqi_message = f"Date: {date}, AQI: {aqi}"
+        m2_message = f"\nCO2: {co2} ppm, \nMoisture: {moisture}, \nSoil Temp: {soil_temp} °C, \nLuminance: {luminance} lux"
+        aqi_message = f"Date: {date}, \nAQI: {aqi}"
         
+        soil_message = ""
+        if(soil_temp != None):
+            if(soil_temp < 20):
+                soil_message = "溫度過低，請注意室內溫度"
+                print("溫度過低，請注意室內溫度")
+            elif(soil_temp > 25):
+                soil_message = "溫度過高，請注意室內溫度"
+                print("溫度過高，請注意室內溫度")
+            else:
+                soil_message = "目前為舒適溫度"
+                print("目前為舒適溫度")
+        else:
+            pass
+
+        lum_message = ""
+        if(luminance != None):
+            if(luminance > 65000):
+                lum_message = "燈泡已關閉"
+                print("燈泡已關閉")
+            else:
+                lum_message = "燈泡已開啟"
+                print("燈泡已開啟")
+        else:
+            pass
+
+        aqi_message1 = ""
+        if(aqi != None):
+            if(aqi <= 50):
+                aqi_message1 = "空氣品質為良好，可正常戶外活動。"
+            elif(aqi > 50 and aqi <= 100):
+                aqi_message1 = "空氣品質普通，仍可正常戶外活動。"
+            elif(aqi > 100 and aqi <= 150):
+                aqi_message1 = "一般民眾如果有不適，應該考慮減少戶外活動。"
+            elif(aqi > 150 and aqi <= 200):                     
+                aqi_message1 = "一般民眾如果有不適，應減少體力消耗，特別是減少戶外活動。"
+            elif(aqi > 200 and aqi <= 300):                     
+                aqi_message1 = "所有人都可能產生較嚴重的健康影響，一般民眾應減少戶外活動。"
+            else:
+                aqi_message1 = "健康威脅達到緊急，一般民眾應避免戶外活動。"
+        else:
+            pass
+
         # 發送消息到 LINE Notify
         if (co2 != None and moisture != None and soil_temp != None and luminance != None and date != None 
             and aqi != None):
-            messages = m2_message + '\n' + aqi_message
+            messages = m2_message + '\n' + aqi_message + '\n' + soil_message + '\n' + lum_message + '\n' + aqi_message1
             Line.notify(messages)
-        
+
         # 等待下一次更新
         time.sleep(exec_interval)  # 每隔一段時間抓取一次數據
 
