@@ -29,6 +29,11 @@ def data_crawling():
         print("目標元素未出現，請檢查網頁是否正常載入")
 
     # 使用 Select 操作
+    # 使用 Select 操作
+    dropdown_county = driver.find_element(By.ID, 'ddl_county')
+    select_county = Select(dropdown_county)
+    select_county.select_by_visible_text("臺南市")
+
     dropdown = driver.find_element(By.ID, 'ddl_site')
     select = Select(dropdown)
     select.select_by_visible_text("臺南")
