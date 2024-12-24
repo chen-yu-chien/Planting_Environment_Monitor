@@ -40,19 +40,19 @@
     
     function Luminance(data){
         console.log("luminance:", data[0]);
-        if(data[0] <= 0){
+        if(data[0] > 80){ // 亮度等級 0
             lum = 0;
         }
-        else if(data[0] > 0 && data[0] <= 25){
+        else if(data[0] <= 80 && data[0] > 60){ // 亮度等級 1
             lum = 25;
         }
-        else if(data[0] > 25 && data[0] <= 50){
+        else if(data[0] <= 60 && data[0] > 40){ // 亮度等級 2
             lum = 50;
         }
-        else if(data[0] > 50 && data[0] <= 75){
+        else if(data[0] <= 40 && data[0] > 20){ // 亮度等級 3
             lum = 75;
         }
-        else {
+        else { // 亮度等級 4
             lum = 99;
         }
         draw();
