@@ -58,7 +58,7 @@ def Msg_O(data:list):
                 aqi = data[0][1]
                 print("aqi message:", aqi)
                 
-                aqi_value = int(aqi.split("AQI 指數: ")[1].split(" (普通)")[0])
+                aqi_value = int(aqi.split("️AQI指數：")[1].split(" (")[0])
                 print("aqi value:", aqi_value) 
             
             case _: 
@@ -128,34 +128,6 @@ def on_register(r):
             print(soil_message)
         else:
             pass
-
-        # lum_message = ""
-        # if(luminance != None):
-        #     if(luminance > 25000):
-        #         lum_message = "燈泡已關閉"
-        #         print("燈泡已關閉")
-        #     else:
-        #         lum_message = "燈泡已開啟"
-        #         print("燈泡已開啟")
-        # else:
-        #     pass
-
-        # aqi_message1 = ""
-        # if(aqi != None):
-        #     if(aqi <= 50):
-        #         aqi_message1 = "空氣品質為良好，可正常戶外活動。"
-        #     elif(aqi > 50 and aqi <= 100):
-        #         aqi_message1 = "空氣品質普通，仍可正常戶外活動。"
-        #     elif(aqi > 100 and aqi <= 150):
-        #         aqi_message1 = "一般民眾如果有不適，應該考慮減少戶外活動。"
-        #     elif(aqi > 150 and aqi <= 200):                     
-        #         aqi_message1 = "一般民眾如果有不適，應減少體力消耗，特別是減少戶外活動。"
-        #     elif(aqi > 200 and aqi <= 300):                     
-        #         aqi_message1 = "所有人都可能產生較嚴重的健康影響，一般民眾應減少戶外活動。"
-        #     else:
-        #         aqi_message1 = "健康威脅達到緊急，一般民眾應避免戶外活動。"
-        # else:
-        #     pass
 
         # 發送消息到 LINE Notify
         if (co2 != None and moisture != None and soil_temp != None and luminance != None and aqi != None and aqi_value != None):
