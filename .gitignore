@@ -1,7 +1,8 @@
 
 Tainan_AQI.csv
+/M2/__pycache__
+/Dummy_AQISensor/__pycache__
+/Dummy_AQISensor/__pycache__
+/Dummy_AQISensor/__pycache__
+/Dummy_LineBot/__pycache__
 Dummy_AQISensor/Tainan_AQI.html
-Dummy_AQISensor/__pycache__
-Dummy_LineBot/__pycache__
-Dummy_LineNotify/__pycache__
-M2/__pycache__
